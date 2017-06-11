@@ -35,7 +35,7 @@ In some cases it may need to run the commands above using `sudo` in Gnu/Linux an
 ### How to run
 
 ```
-python smtptest.py ^host^ --username="^someusername^" --password="^somepassword^"
+python smtptest.py ^host^ --username="^someusername^" --password="^somepassword^" --ports ^Port1^ ^Port2^
 ```
 
 Where:
@@ -43,4 +43,5 @@ Where:
 * ^host^: The hostname of the smtp server
 * ^username^: The username of the smtp server
 * ^password^: The password of the smtp server
+* ^Port1^, ^Port2^: (optional) The Smtp ports to test. If you want to check for default then onnit **COMPLETLEY** the `--ports` param.
 
