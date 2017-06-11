@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #
-# Random lin listening port finder
+# Random non listening port finder
 # Copyright (C) 2016-2017 Dimitrios Desyllas
 #
 # This program is free software: you can redistribute it and/or modify
