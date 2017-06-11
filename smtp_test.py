@@ -166,6 +166,7 @@ if(args.ports is not None):
 reports={}
 print "Testing SMTP Connection on: %s\n" % (colored(args.smtp_server, 'cyan'))
 print colored("Testing may take for a while. Please grab a cup of cofee ;)","yellow")
+print colored("Note: Also Pressing Ctrl+C may kame the script to continue if takes WAY too much time.","yellow")
 
 for port in smtp_ports:
    report = {'ssl':None,'no_ssl':None}
