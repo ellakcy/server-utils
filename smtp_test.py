@@ -2,14 +2,8 @@
 
 from smtplib import SMTP
 from smtplib import SMTP_SSL
-from smtplib import SMTPConnectError
-from smtplib import SMTPAuthenticationError
 from smtplib import SMTPServerDisconnected
-from smtplib import SMTPException
-from ssl import SSLError
-from socket import gaierror
 from termcolor import colored
-from time import sleep
 
 import argparse
 from tabulate import tabulate
@@ -134,7 +128,6 @@ def print_full_report(report,host):
     :param host: 
     :return: 
     '''
-    print "Testing SMTP Connection on: %s\n" % (colored(host,'cyan'))
     print "No SSL Connection:"
     print_report(report,'no_ssl')
     print "\nSSL Connection"
@@ -162,7 +155,7 @@ def get_ok_or_fail_colored(bool):
         return colored('FAIL','red')
 
 #Common smtp ports
-smtp_ports=[25,2525,587,465,2526]
+smtp_ports=[25,587,465]
 
 args=getArguments()
 
@@ -171,12 +164,17 @@ if(args.ports is not None):
 
 #Storing the reports into seperate arrays
 reports={}
+print "Testing SMTP Connection on: %s\n" % (colored(args.smtp_server, 'cyan'))
+print colored("Testing may take for a while. Please grab a cup of cofee ;)","yellow")
+print "Testing ports:"
 
 for port in smtp_ports:
-    report = {'ssl':None,'no_ssl':None}
-    report['no_ssl'] = check_smtp_no_ssl(args.smtp_server, port, args.username, args.password)
-    report['ssl'] = check_smtp_ssl(args.smtp_server, port, args.username, args.password)
-    report['startls'] = check_smtp_star_tls(args.smtp_server, port, args.username, args.password)
-    reports[port]=report
+   print colored(port,'blue')+","
+   report = {'ssl':None,'no_ssl':None}
+   report['no_ssl'] = check_smtp_no_ssl(args.smtp_server, port, args.username, args.password)
+   report['ssl'] = check_smtp_ssl(args.smtp_server, port, args.username, args.password)
+   report['startls'] = check_smtp_star_tls(args.smtp_server, port, args.username, args.password)
+   reports[port]=report
 
+print"\n FULL REPORT:"
 print_full_report(reports,args.smtp_server)
