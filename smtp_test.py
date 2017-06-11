@@ -166,13 +166,14 @@ if(args.ports is not None):
 reports={}
 print "Testing SMTP Connection on: %s\n" % (colored(args.smtp_server, 'cyan'))
 print colored("Testing may take for a while. Please grab a cup of cofee ;)","yellow")
-print "Testing ports:"
 
 for port in smtp_ports:
-   print colored(port,'blue')+","
    report = {'ssl':None,'no_ssl':None}
+   print "Testing port %s for NON SSL Connection" % (colored(port,'blue'))
    report['no_ssl'] = check_smtp_no_ssl(args.smtp_server, port, args.username, args.password)
+   print "Testing port %s for SSL Connection" % (colored(port,'blue'))
    report['ssl'] = check_smtp_ssl(args.smtp_server, port, args.username, args.password)
+   print "Testing port %s for StarTLS Connection" % (colored(port,'blue'))
    report['startls'] = check_smtp_star_tls(args.smtp_server, port, args.username, args.password)
    reports[port]=report
 
