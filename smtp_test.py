@@ -1,9 +1,29 @@
 #!/usr/bin/env python
 
+'''
+Cypriot Free software community server utility scripts: SMTP test
+Copyright (C) 2017  Cypriot Free software community ELLAK
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+'''
+
 from smtplib import SMTP
 from smtplib import SMTP_SSL
 from smtplib import SMTPServerDisconnected
 from termcolor import colored
+import sys
 
 import argparse
 from tabulate import tabulate
@@ -147,6 +167,7 @@ def print_report(report,what_to_print):
         strings.append(output)
 
     print tabulate(strings,headers=header,tablefmt="simple")
+    sys.stdout.flush()
 
 def get_ok_or_fail_colored(bool):
     if(bool== True):
@@ -166,7 +187,6 @@ if(args.ports is not None):
 reports={}
 print "Testing SMTP Connection on: %s\n" % (colored(args.smtp_server, 'cyan'))
 print colored("Testing may take for a while. Please grab a cup of cofee ;)","yellow")
-print colored("Note: Also Pressing Ctrl+C may kame the script to continue if takes WAY too much time.","yellow")
 
 for port in smtp_ports:
    report = {'ssl':None,'no_ssl':None}
@@ -177,6 +197,8 @@ for port in smtp_ports:
    print "Testing port %s for StarTLS Connection" % (colored(port,'blue'))
    report['startls'] = check_smtp_star_tls(args.smtp_server, port, args.username, args.password)
    reports[port]=report
+   sys.stdout.flush()
 
+sys.stdout.flush()
 print"\n FULL REPORT:"
 print_full_report(reports,args.smtp_server)
