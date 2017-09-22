@@ -1,14 +1,14 @@
-#Server utility tools
+# Server utility tools
 
-##Preface
+## Preface
 This repo contains some utility scripts in order to manage our server.
 
 ## Scripts
 
-# randomport.py
+### randomport.py
 This is a script that finds a random available non-listening port that you can use in order to use it on port mapping.
 
-### Parameters
+#### Parameters
 
 Parameter | Default Value | Description
 --- | --- | ---
@@ -16,9 +16,9 @@ Parameter | Default Value | Description
 -f, --from_port | 1024 | The minimum available port of the port searching range for non-listening ports
 -t, --to_port | 49151 | The maximum available port of the port searching range for non-listening ports
 
-## smtp_tesy.py
+### smtp_tesy.py
 
-### Packages
+#### Packages
 It needs the `termcolor`,`argparse` and `tabulate` packages.
 
 You can install them via pip
@@ -32,7 +32,7 @@ pip install tabulate
 Note:
 In some cases it may need to run the commands above using `sudo` in Gnu/Linux and Unix like systems.
 
-### How to run
+#### How to run
 
 ```
 python smtptest.py ^host^ --username="^someusername^" --password="^somepassword^" --ports ^Port1^ ^Port2^
